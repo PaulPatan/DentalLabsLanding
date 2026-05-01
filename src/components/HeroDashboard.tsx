@@ -34,7 +34,7 @@ export function HeroDashboard() {
             <Bell className="h-3.5 w-3.5 text-ink-muted" />
           </div>
 
-          <div className="grid grid-cols-[180px_1fr_220px]">
+          <div className="grid grid-cols-[130px_1fr] lg:grid-cols-[180px_1fr_220px]">
             {/* Sidebar */}
             <aside className="border-r border-ink/5 bg-bg-warm/40 p-4 text-[11px]">
               <div className="flex items-center gap-2">
@@ -88,15 +88,15 @@ export function HeroDashboard() {
                   <span className="flex items-center gap-1.5">
                     <span className="h-2 w-2 rounded-full bg-teal-500" /> Chair 1
                   </span>
-                  <span className="flex items-center gap-1.5">
+                  <span className="hidden lg:flex items-center gap-1.5">
                     <span className="h-2 w-2 rounded-full bg-gold-400" /> Chair 2
                   </span>
                 </div>
               </div>
 
-              <div className="mt-4 grid grid-cols-[36px_1fr_1fr] gap-1 text-[10px]">
+              <div className="mt-4 text-[10px]">
                 {['09', '10', '11', '12', '13', '14'].map((t, i) => (
-                  <div key={t} className="contents">
+                  <div key={t} className="grid grid-cols-[36px_1fr] lg:grid-cols-[36px_1fr_1fr] gap-1">
                     <div className="py-1.5 font-mono text-ink-muted">{t}:00</div>
                     <div className="relative h-10 rounded-md bg-bg-warm/40">
                       {i === 0 && (
@@ -106,7 +106,7 @@ export function HeroDashboard() {
                         <Block tone="teal" title="Crown prep · 16" name="Maria T." span={2} />
                       )}
                     </div>
-                    <div className="relative h-10 rounded-md bg-bg-warm/40">
+                    <div className="relative hidden h-10 rounded-md bg-bg-warm/40 lg:block">
                       {i === 1 && (
                         <Block tone="gold" title="Consultation" name="Vlad M." />
                       )}
@@ -125,7 +125,7 @@ export function HeroDashboard() {
             </section>
 
             {/* Right rail: patient peek */}
-            <aside className="border-l border-ink/5 p-4 text-[10px]">
+            <aside className="hidden lg:block border-l border-ink/5 p-4 text-[10px]">
               <div className="font-mono text-[9px] uppercase tracking-[0.2em] text-ink-muted">
                 Up next
               </div>

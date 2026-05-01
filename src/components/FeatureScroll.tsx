@@ -57,6 +57,7 @@ export function FeatureScroll() {
 
   useEffect(() => {
     if (!sectionRef.current || !trackRef.current) return;
+    if (window.innerWidth < 1024) return;
 
     const ctx = gsap.context(() => {
       const total = chapters.length;
@@ -124,7 +125,31 @@ export function FeatureScroll() {
   }, []);
 
   return (
-    <section id="features" ref={sectionRef} className="relative isolate bg-bg">
+    <div id="features">
+      {/* Mobile: plain stacked chapters */}
+      <section className="relative isolate bg-bg py-20 lg:hidden">
+        <div className="mx-auto max-w-6xl px-6 space-y-20">
+          {chapters.map(({ eyebrow, Icon, title, copy, Mockup }, i) => (
+            <div key={i} className="flex flex-col gap-8">
+              <div>
+                <span className="eyebrow flex items-center gap-2">
+                  <Icon className="h-3.5 w-3.5 text-teal-600" /> {eyebrow}
+                </span>
+                <h3 className="h-display mt-4 text-[2rem] font-medium leading-[1.1] text-ink">
+                  {title}
+                </h3>
+                <p className="mt-4 text-base leading-relaxed text-ink-soft">{copy}</p>
+              </div>
+              <div className="h-[440px]">
+                <Mockup />
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Desktop: pinned scroll */}
+      <section ref={sectionRef} className="hidden lg:block relative isolate bg-bg">
       <div ref={trackRef} className="relative h-screen overflow-hidden">
         {/* Backgrounds */}
         <div className="absolute inset-0 -z-10 bg-gradient-to-b from-bg via-bg-warm/40 to-bg" />
@@ -184,5 +209,6 @@ export function FeatureScroll() {
         </div>
       </div>
     </section>
+    </div>
   );
 }

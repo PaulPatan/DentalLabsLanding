@@ -97,10 +97,10 @@ export function XrayMockup() {
           tooth 13 implant:     cx=24.7%, cy=18.4%  → callout top ≈ 11%
           tooth 23 bone-loss:   cx=75.3%, cy=18.4%  → callout top ≈ 11%
       */}
-      <Callout className="left-[4%]  top-[48%]"  tone="cavity"      label="Cavity"       conf={92}  />
-      <Callout className="right-[1%] top-[48%]"  tone="restoration" label="Restoration"  conf={87}  />
-      <Callout className="left-[17%] top-[11%]"  tone="implant"     label="Implant"      conf={100} />
-      <Callout className="right-[15%] top-[11%]" tone="bone"        label="Bone loss"    conf={78}  />
+      <Callout className="hidden lg:flex left-[4%]   top-[48%]"  tone="cavity"      label="Cavity"       conf={92}  />
+      <Callout className="hidden lg:flex right-[1%]  top-[48%]"  tone="restoration" label="Restoration"  conf={87}  />
+      <Callout className="hidden lg:flex left-[17%]  top-[11%]"  tone="implant"     label="Implant"      conf={100} />
+      <Callout className="hidden lg:flex right-[15%] top-[11%]"  tone="bone"        label="Bone loss"    conf={78}  />
 
       {/* Legend */}
       <div className="absolute bottom-3 right-3 z-10 flex flex-wrap items-center gap-2.5 rounded-lg bg-black/55 px-3 py-1.5 text-[9px] font-mono uppercase tracking-[0.14em] text-white/70 ring-1 ring-white/10 backdrop-blur">
@@ -126,7 +126,7 @@ function Callout({
 }) {
   const color = FINDING_COLOR[tone];
   return (
-    <div className={`absolute z-10 ${className} flex flex-col items-center gap-1`}>
+    <div className={`absolute z-10 flex-col items-center gap-1 ${className}`}>
       <div
         className="rounded-md bg-black/70 px-2 py-1 text-[10px] font-mono leading-none text-white shadow-lg backdrop-blur"
         style={{ boxShadow: `0 0 18px -6px ${color}`, border: `1px solid ${color}` }}
