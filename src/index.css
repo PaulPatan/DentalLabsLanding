@@ -1,0 +1,173 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+  --grid-line: hsl(195 25% 88%);
+}
+
+html,
+body {
+  background: hsl(40 33% 98%);
+  color: hsl(195 45% 11%);
+  font-family: 'DM Sans', ui-sans-serif, system-ui, sans-serif;
+  font-feature-settings: 'ss01', 'cv11';
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .text-pretty {
+    text-wrap: pretty;
+  }
+
+  /* dotted grid that fades to bg at the edges — used in hero background */
+  .bg-grid {
+    background-image:
+      radial-gradient(circle at 1px 1px, hsl(195 25% 80% / 0.55) 1px, transparent 0);
+    background-size: 28px 28px;
+  }
+
+  .mask-radial-fade {
+    -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, #000 35%, transparent 75%);
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, #000 35%, transparent 75%);
+  }
+
+  .mask-edge-fade {
+    -webkit-mask-image: linear-gradient(to bottom, transparent, #000 12%, #000 88%, transparent);
+    mask-image: linear-gradient(to bottom, transparent, #000 12%, #000 88%, transparent);
+  }
+
+  /* Wave underline used to highlight key words mid-headline */
+  .accent-stroke {
+    background-image: linear-gradient(120deg, hsl(43 96% 70% / 0.55), hsl(43 96% 56% / 0.85));
+    background-repeat: no-repeat;
+    background-size: 100% 0.42em;
+    background-position: 0 88%;
+    padding: 0 0.05em;
+  }
+
+  /* Used by GSAP per-word reveal — initial blurred state */
+  .word-reveal {
+    display: inline-block;
+    filter: blur(10px);
+    opacity: 0.18;
+    transform: translateY(4px);
+    will-change: filter, opacity, transform;
+  }
+}
+
+/* react-odontogram (2D) ships its own dark-mode background and tooltip.
+   Make its SVG transparent so our X-ray gradient + scanning beam show through,
+   and lift its tooth contrast for the radiograph context. */
+.xray-host .Odontogram,
+.xray-host .Odontogram svg {
+  background: transparent !important;
+}
+.xray-host .Odontogram.dark-theme svg {
+  --base-blue: #d8e7e0;
+  --dark-blue: #c9efe2;
+  --light-blue: rgba(95, 200, 184, 0.18);
+  color: #d8e7e0;
+}
+.xray-host .Odontogram svg path {
+  stroke-width: 1.1;
+}
+
+/* Light-theme chart on the Charting feature mockup — clinical look,
+   teal accent matches our brand. */
+.chart-host .Odontogram,
+.chart-host .Odontogram svg {
+  background: transparent !important;
+}
+.chart-host .Odontogram svg {
+  --base-blue: hsl(195 18% 55%);
+  --dark-blue: hsl(173 58% 39%);
+  --light-blue: hsl(173 58% 85%);
+  color: hsl(195 18% 55%);
+}
+.chart-host .Odontogram svg path {
+  stroke-width: 1;
+}
+
+/* Tiny odontogram inside the hero dashboard right rail */
+.hero-chart-host .Odontogram,
+.hero-chart-host .Odontogram svg {
+  background: transparent !important;
+}
+.hero-chart-host .Odontogram svg {
+  --base-blue: hsl(195 18% 60%);
+  --dark-blue: hsl(173 58% 39%);
+  --light-blue: hsl(173 58% 85%);
+  color: hsl(195 18% 60%);
+}
+.hero-chart-host .Odontogram svg path {
+  stroke-width: 0.8;
+}
+
+@layer utilities {
+  [data-reveal] {
+    opacity: 0;
+    transform: translate3d(0, 28px, 0);
+    transition:
+      opacity 700ms cubic-bezier(0.16, 1, 0.3, 1),
+      transform 900ms cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+  }
+  [data-reveal][data-revealed='true'] {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@layer components {
+  .pill {
+    @apply inline-flex items-center gap-2 rounded-full border border-ink/10 bg-white/70 px-3.5 py-1.5 text-xs font-medium text-ink-soft backdrop-blur-md;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-teal-600 px-6 py-3 text-sm font-semibold text-white shadow-soft transition hover:-translate-y-0.5 hover:bg-teal-500 hover:shadow-glow active:translate-y-0;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-ink/10 bg-white/60 px-6 py-3 text-sm font-semibold text-ink backdrop-blur-md transition hover:border-ink/20 hover:bg-white;
+  }
+
+  .h-display {
+    font-family: 'Fraunces', ui-serif, Georgia, serif;
+    font-feature-settings: 'ss01', 'salt';
+    letter-spacing: -0.02em;
+    line-height: 1.02;
+  }
+
+  .eyebrow {
+    @apply font-mono text-[11px] uppercase tracking-[0.18em] text-ink-muted;
+  }
+}
+
+::selection {
+  background: hsl(43 96% 70%);
+  color: hsl(195 45% 11%);
+}
